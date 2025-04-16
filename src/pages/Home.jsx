@@ -1,29 +1,22 @@
-import { useState, useEffect } from "react";
-
+import { Link } from "react-router";
+import { useMovieContext } from "../context/moviesContext";
 export default function () {
-  const [movies, setMovies] = useState([]);
+  const { movies } = useMovieContext();
 
-  useEffect(() => {
-    fetch("http://localhost:3000/api/v1/movies")
-      .then((response) => response.json())
-      .then((data) => {
-        setMovies(data);
-      });
-  }, []);
   return (
     <>
       <main>
         <div className="container">
           <div className="row row-cols-sm-1 row-cols-md-2 row-cols-lg-4 g-3">
-            {movies.map((movie) => (
+            {movies?.map((movie) => (
               <div className="col" key={movie.id}>
-                <div className="card h-100">
+                <Link to={`/movie/${movie.id}`} className="card h-100">
                   <img
                     src={`http://localhost:3000/images/${movie.image}`}
                     alt=""
                     className="card-img-top h-100"
                   />
-                </div>
+                </Link>
               </div>
             ))}
           </div>

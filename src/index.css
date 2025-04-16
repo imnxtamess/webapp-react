@@ -8,6 +8,15 @@ body {
 header {
   background-color: #0b0b0b;
   color: #e40914;
+  .navlink {
+    text-decoration: none;
+  }
+  .active {
+    color: white;
+  }
+  .inactive {
+    color: #595959;
+  }
 }
 
 footer {
@@ -39,5 +48,38 @@ footer {
   }
   span {
     color: #595959;
+  }
+}
+
+.detailsContainer {
+  height: 100%;
+  h1 {
+    color: white;
+  }
+  img {
+    height: 300px;
+  }
+  .details {
+    margin-top: 3.2rem;
+    strong {
+      color: white;
+      font-weight: 500;
+    }
+    p {
+      color: rgb(172, 168, 168);
+    }
+  }
+}
+
+.reviewsContainer {
+  color: rgb(172, 168, 168);
+  h3,
+  strong {
+    color: white;
+  }
+  .reviewWrapper {
+    padding: 1rem;
+    margin: 1rem 0rem;
+    border: 1px solid white;
   }
 }
