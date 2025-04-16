@@ -75,36 +75,37 @@ export default function MovieDetails() {
       <div className="reviewsContainer mt-3">
         <h3>Reviews</h3>
         {movieDetails.reviews.map((review) => (
-          <>
-            <div className="reviewWrapper d-flex flex-column gap-2 ">
-              <div className="d-flex justify-content-between">
-                <div>
-                  <strong>User:</strong> <span>{review.name}</span>
-                </div>
-                <div>
-                  <strong>Posted at:</strong> <span>{review.created_at}</span>
-                </div>
-              </div>
-              <hr />
-              <div>{starScore(review.vote)}</div>
+          <div
+            key={review.id}
+            className="reviewWrapper d-flex flex-column gap-2 "
+          >
+            <div className="d-flex justify-content-between">
               <div>
-                <p>{review.text}</p>
+                <strong>User:</strong> <span>{review.name}</span>
+              </div>
+              <div>
+                <strong>Posted at:</strong> <span>{review.created_at}</span>
               </div>
             </div>
-          </>
+            <hr />
+            <div>{starScore(review.vote)}</div>
+            <div>
+              <p>{review.text}</p>
+            </div>
+          </div>
         ))}
       </div>
 
       <div className="d-flex justify-content-between mt-4">
         <button
-          className="btn btn-primary"
+          className="btn btn-secondary"
           onClick={handlePrevious}
           disabled={parseInt(id) <= 1}
         >
           Previous
         </button>
         <button
-          className="btn btn-primary"
+          className="btn btn-secondary"
           onClick={handleNext}
           disabled={parseInt(id) === movies.length}
         >
