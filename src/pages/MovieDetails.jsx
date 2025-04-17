@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useMovieContext } from "../context/moviesContext";
+import Reviews from "../components/Reviews";
+import PostReview from "../components/PostReview";
 
 export default function MovieDetails() {
   const { movies } = useMovieContext();
@@ -72,30 +74,6 @@ export default function MovieDetails() {
           </div>
         </div>
       </div>
-      <div className="reviewsContainer mt-3">
-        <h3>Reviews</h3>
-        {movieDetails.reviews.map((review) => (
-          <div
-            key={review.id}
-            className="reviewWrapper d-flex flex-column gap-2 "
-          >
-            <div className="d-flex justify-content-between">
-              <div>
-                <strong>User:</strong> <span>{review.name}</span>
-              </div>
-              <div>
-                <strong>Posted at:</strong> <span>{review.created_at}</span>
-              </div>
-            </div>
-            <hr />
-            <div>{starScore(review.vote)}</div>
-            <div>
-              <p>{review.text}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
       <div className="d-flex justify-content-between mt-4">
         <button
           className="btn btn-secondary"
@@ -112,6 +90,8 @@ export default function MovieDetails() {
           Next
         </button>
       </div>
+      <PostReview />
+      <Reviews reviewList={movieDetails.reviews} />
     </div>
   );
 }
