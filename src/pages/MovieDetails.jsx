@@ -16,7 +16,7 @@ export default function MovieDetails() {
       .then((data) => {
         setMovieDetails(data);
       });
-  }, [id]);
+  }, [id, movieDetails]);
 
   if (!movieDetails) {
     return <p>Loading...</p>;
@@ -30,19 +30,6 @@ export default function MovieDetails() {
     if (parseInt(id) > 1) {
       navigate(`/movie/${parseInt(id) - 1}`);
     }
-  }
-
-  function starScore(vote) {
-    const stars = [];
-    const emptyStars = [];
-
-    for (let i = 0; i < vote; i++) {
-      stars.push(<i key={i} className="bi bi-star-fill"></i>);
-    }
-    for (let i = 0; i < 5 - vote; i++) {
-      emptyStars.push(<i key={i} className="bi bi-star"></i>);
-    }
-    return [...stars, emptyStars];
   }
 
   return (

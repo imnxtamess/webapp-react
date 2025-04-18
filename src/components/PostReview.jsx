@@ -1,14 +1,21 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import AlertBanner from "./AlertBanner";
 export default function PostReview() {
   const { id } = useParams();
 
   const [formData, setFormData] = useState({
     movie_id: "",
     name: "",
-    vote: Number(""),
+    vote: 5,
     text: "",
   });
+
+  const [isValid, setIsValid] = useState(true);
+
+  const [isNameValid, setIsNameValid] = useState(true);
+
+  const [isTextValid, setisTextValid] = useState(true);
 
   useEffect(() => {
     setFormData((prevFormData) => ({
@@ -28,6 +35,18 @@ export default function PostReview() {
 
   function handleFormSubmit(e) {
     e.preventDefault();
+
+    if (formData.name.length < 2) {
+      setIsNameValid(false);
+      setIsValid(false);
+    }
+
+    if (formData.text.length < 3) {
+      setisTextValid(false);
+      setIsValid(false);
+    }
+
+    if (!isValid) return;
     fetch("http://localhost:3000/api/v1/movies", {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -61,12 +80,13 @@ export default function PostReview() {
               onChange={(e) => handleInputChange(e)}
               name="vote"
               id="vote"
+              defaultValue={5}
             >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
             </select>
           </div>
         </div>
@@ -75,9 +95,14 @@ export default function PostReview() {
           name="text"
           id="text"
         ></textarea>
-        <button className="mt-2 btn btn-secondary" type="submit">
-          Post
-        </button>
+        <div className="d-flex align-items-center gap-3 mt-2">
+          <button className="btn btn-secondary" type="submit">
+            Post
+          </button>
+          {!isValid ? (
+            <AlertBanner text={isTextValid} name={isNameValid} />
+          ) : null}
+        </div>
       </form>
     </>
   );
