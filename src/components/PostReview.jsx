@@ -15,7 +15,7 @@ export default function PostReview() {
 
   const [isNameValid, setIsNameValid] = useState(true);
 
-  const [isTextValid, setisTextValid] = useState(true);
+  const [isTextValid, setIsTextValid] = useState(true);
 
   useEffect(() => {
     setFormData((prevFormData) => ({
@@ -36,17 +36,27 @@ export default function PostReview() {
   function handleFormSubmit(e) {
     e.preventDefault();
 
+    setIsNameValid(true);
+    setIsTextValid(true);
+    setIsValid(true);
+    let isFormValid = true;
+
     if (formData.name.length < 2) {
       setIsNameValid(false);
       setIsValid(false);
+      isFormValid = false;
     }
 
     if (formData.text.length < 3) {
-      setisTextValid(false);
+      setIsTextValid(false);
       setIsValid(false);
+      isFormValid = false;
     }
 
-    if (!isValid) return;
+    if (!isFormValid) {
+      return;
+    }
+
     fetch("http://localhost:3000/api/v1/movies", {
       method: "POST",
       headers: { "Content-type": "application/json" },
