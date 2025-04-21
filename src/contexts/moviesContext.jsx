@@ -1,16 +1,19 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import GlobalContext from "./globalContext";
 
 const MoviesContext = createContext();
 
 //fetch hook
 function useFetchMovies() {
   const [movies, setMovies] = useState([]);
+  const { setIsLoading } = useContext(GlobalContext);
 
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/movies")
       .then((response) => response.json())
       .then((data) => {
         setMovies(data);
+        setIsLoading(false);
       });
   }, []);
   return movies;

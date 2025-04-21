@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { useMovieContext } from "../context/moviesContext";
+import { useMovieContext } from "../contexts/moviesContext";
 export default function () {
   const { movies } = useMovieContext();
 

@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useMovieContext } from "../context/moviesContext";
+import { useMovieContext } from "../contexts/moviesContext";
 import Reviews from "../components/Reviews";
 import PostReview from "../components/PostReview";
 
