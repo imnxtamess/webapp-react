@@ -7,7 +7,7 @@ export default function () {
     <>
       <main>
         <div className="container">
-          <div className="row row-cols-sm-1 row-cols-md-2 row-cols-lg-4 g-3">
+          <div className="row row-cols-1 row-cols-sm-1  row-cols-md-2 row-cols-lg-4 g-3">
             {movies?.map((movie) => (
               <div className="col" key={movie.id}>
                 <Link to={`/movie/${movie.id}`} className="card h-100">
